@@ -8,7 +8,6 @@ export async function POST(request: NextRequest) {
     const body: LoginCredentials = await request.json();
     const { email, password } = body;
 
-    // Validação dos dados
     if (!email || !password) {
       return NextResponse.json(
         { success: false, error: 'Email e senha são obrigatórios' },
@@ -16,7 +15,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Buscar usuário pelo email
     const user = await prisma.user.findUnique({
       where: { email },
     });
@@ -28,7 +26,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verificar senha
     const isPasswordValid = await verifyPassword(password, user.password);
     if (!isPasswordValid) {
       return NextResponse.json(
@@ -37,13 +34,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Gerar token JWT
     const token = generateToken({
       userId: user.id,
       email: user.email,
     });
 
-    // Retornar dados do usuário (sem a senha) e token
     const userData = {
       id: user.id,
       email: user.email,

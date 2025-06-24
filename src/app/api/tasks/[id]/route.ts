@@ -9,17 +9,15 @@ interface RouteParams {
   };
 }
 
-// GET /api/tasks/[id] - Obter uma tarefa específica
 export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
     const user = await getAuthenticatedUser(request);
     const { id } = params;
 
-    // Buscar tarefa
     const task = await prisma.task.findFirst({
       where: {
         id,
-        userId: user.id, // Garantir que a tarefa pertence ao usuário
+        userId: user.id,
       },
       include: {
         user: {
@@ -59,7 +57,6 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
   }
 }
 
-// PUT /api/tasks/[id] - Atualizar uma tarefa
 export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
     const user = await getAuthenticatedUser(request);
@@ -67,7 +64,6 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     const body: UpdateTaskData = await request.json();
     const { title, description, status, completedAt } = body;
 
-    // Verificar se a tarefa existe e pertence ao usuário
     const existingTask = await prisma.task.findFirst({
       where: {
         id,
@@ -82,7 +78,6 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       );
     }
 
-    // Validação dos dados
     if (title !== undefined) {
       if (!title || title.trim().length === 0) {
         return NextResponse.json(
@@ -99,7 +94,6 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       }
     }
 
-    // Validar status se fornecido
     if (status && !Object.values(TaskStatus).includes(status)) {
       return NextResponse.json(
         { success: false, error: 'Status inválido' },
@@ -107,25 +101,21 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       );
     }
 
-    // Preparar dados para atualização
     const updateData: any = {};
 
     if (title !== undefined) updateData.title = title.trim();
     if (description !== undefined) updateData.description = description?.trim() || null;
     if (status !== undefined) {
       updateData.status = status;
-      // Se mudou para concluída e não tinha data de conclusão, adicionar
       if (status === TaskStatus.CONCLUIDA && !existingTask.completedAt) {
         updateData.completedAt = new Date();
       }
-      // Se mudou de concluída para outro status, remover data de conclusão
       if (status !== TaskStatus.CONCLUIDA && existingTask.completedAt) {
         updateData.completedAt = null;
       }
     }
     if (completedAt !== undefined) updateData.completedAt = completedAt;
 
-    // Atualizar tarefa
     const task = await prisma.task.update({
       where: { id },
       data: updateData,
@@ -161,13 +151,11 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   }
 }
 
-// DELETE /api/tasks/[id] - Deletar uma tarefa
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
     const user = await getAuthenticatedUser(request);
     const { id } = params;
 
-    // Verificar se a tarefa existe e pertence ao usuário
     const existingTask = await prisma.task.findFirst({
       where: {
         id,
@@ -182,7 +170,6 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
       );
     }
 
-    // Deletar tarefa
     await prisma.task.delete({
       where: { id },
     });

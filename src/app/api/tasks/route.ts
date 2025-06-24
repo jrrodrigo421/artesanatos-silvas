@@ -3,16 +3,13 @@ import { prisma } from '@/lib/prisma';
 import { getAuthenticatedUser, AuthError } from '@/lib/auth';
 import { CreateTaskData, TaskStatus } from '@/types';
 
-// GET /api/tasks - Listar todas as tarefas do usuário
 export async function GET(request: NextRequest) {
   try {
     const user = await getAuthenticatedUser(request);
 
-    // Obter parâmetros de query (filtros)
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status') as TaskStatus | null;
 
-    // Construir filtros
     const where: any = {
       userId: user.id,
     };
@@ -21,7 +18,6 @@ export async function GET(request: NextRequest) {
       where.status = status;
     }
 
-    // Buscar tarefas
     const tasks = await prisma.task.findMany({
       where,
       orderBy: {
@@ -58,14 +54,12 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/tasks - Criar nova tarefa
 export async function POST(request: NextRequest) {
   try {
     const user = await getAuthenticatedUser(request);
     const body: CreateTaskData = await request.json();
     const { title, description, status = TaskStatus.PENDENTE } = body;
 
-    // Validação dos dados
     if (!title || title.trim().length === 0) {
       return NextResponse.json(
         { success: false, error: 'Título é obrigatório' },
@@ -80,7 +74,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validar status se fornecido
     if (status && !Object.values(TaskStatus).includes(status)) {
       return NextResponse.json(
         { success: false, error: 'Status inválido' },
@@ -88,7 +81,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Criar tarefa
     const task = await prisma.task.create({
       data: {
         title: title.trim(),
