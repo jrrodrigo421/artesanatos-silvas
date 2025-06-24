@@ -88,7 +88,6 @@ export default function DashboardPage() {
     }
   };
 
-  // Função wrapper para lidar com ambos os tipos
   const handleFormSubmit = async (data: CreateTaskData | UpdateTaskData) => {
     if (editingTask) {
       await handleUpdateTask(data as UpdateTaskData);
@@ -130,7 +129,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -159,7 +157,6 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Controls */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <button
             onClick={() => setShowForm(!showForm)}
@@ -184,7 +181,6 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Task Form */}
         {showForm && (
           <div className="mb-8">
             <TaskForm
@@ -196,7 +192,6 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Tasks List */}
         {filteredTasks.length === 0 ? (
           <div className="text-center py-12">
             <div className="text-gray-500 text-lg">
