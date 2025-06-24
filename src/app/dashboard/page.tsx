@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { Task, CreateTaskData, UpdateTaskData } from '@/types';
+import { Task, CreateTaskData, UpdateTaskData, TaskStatus } from '@/types';
 import { tasks as taskApi } from '@/lib/api';
 import { TaskCard } from '@/components/TaskCard';
 import { TaskForm } from '@/components/TaskForm';
@@ -174,9 +174,9 @@ export default function DashboardPage() {
             className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="all">Todos os Status</option>
-            <option value="pendente">Pendente</option>
-            <option value="em_andamento">Em Andamento</option>
-            <option value="concluida">Concluída</option>
+            <option value={TaskStatus.PENDENTE}>Pendente</option>
+            <option value={TaskStatus.EM_ANDAMENTO}>Em Andamento</option>
+            <option value={TaskStatus.CONCLUIDA}>Concluída</option>
           </select>
 
           <div className="text-sm text-gray-600 flex items-center">
@@ -202,7 +202,7 @@ export default function DashboardPage() {
             <div className="text-gray-500 text-lg">
               {statusFilter === 'all'
                 ? 'Nenhuma tarefa encontrada'
-                : `Nenhuma tarefa ${statusFilter === 'pendente' ? 'pendente' : statusFilter === 'em_andamento' ? 'em andamento' : 'concluída'} encontrada`
+                : `Nenhuma tarefa ${statusFilter === TaskStatus.PENDENTE ? 'pendente' : statusFilter === TaskStatus.EM_ANDAMENTO ? 'em andamento' : 'concluída'} encontrada`
               }
             </div>
             <p className="text-gray-400 mt-2">
