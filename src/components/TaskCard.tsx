@@ -1,6 +1,6 @@
 'use client';
 
-import { Task } from '@/types';
+import { Task, TaskStatus } from '@/types';
 
 interface TaskCardProps {
   task: Task;
@@ -11,11 +11,11 @@ interface TaskCardProps {
 export const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
   const getStatusColor = (status: Task['status']) => {
     switch (status) {
-      case 'pendente':
+      case TaskStatus.PENDENTE:
         return 'bg-yellow-100 text-yellow-800';
-      case 'em_andamento':
+      case TaskStatus.EM_ANDAMENTO:
         return 'bg-blue-100 text-blue-800';
-      case 'concluida':
+      case TaskStatus.CONCLUIDA:
         return 'bg-green-100 text-green-800';
       default:
         return 'bg-gray-100 text-gray-800';
@@ -24,19 +24,19 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) =>
 
   const getStatusText = (status: Task['status']) => {
     switch (status) {
-      case 'pendente':
+      case TaskStatus.PENDENTE:
         return 'Pendente';
-      case 'em_andamento':
+      case TaskStatus.EM_ANDAMENTO:
         return 'Em Andamento';
-      case 'concluida':
+      case TaskStatus.CONCLUIDA:
         return 'Concluída';
       default:
         return status;
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pt-BR', {
+  const formatDate = (date: Date) => {
+    return new Date(date).toLocaleDateString('pt-BR', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Task, CreateTaskData, UpdateTaskData } from '@/types';
+import { Task, CreateTaskData, UpdateTaskData, TaskStatus } from '@/types';
 
 interface TaskFormProps {
   task?: Task;
@@ -18,12 +18,12 @@ export const TaskForm: React.FC<TaskFormProps> = ({
 }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState<Task['status']>('pendente');
+  const [status, setStatus] = useState<Task['status']>(TaskStatus.PENDENTE);
 
   useEffect(() => {
     if (task) {
       setTitle(task.title);
-      setDescription(task.description);
+      setDescription(task.description || '');
       setStatus(task.status);
     }
   }, [task]);
@@ -89,9 +89,9 @@ export const TaskForm: React.FC<TaskFormProps> = ({
             onChange={(e) => setStatus(e.target.value as Task['status'])}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            <option value="pendente">Pendente</option>
-            <option value="em_andamento">Em Andamento</option>
-            <option value="concluida">Concluída</option>
+            <option value={TaskStatus.PENDENTE}>Pendente</option>
+            <option value={TaskStatus.EM_ANDAMENTO}>Em Andamento</option>
+            <option value={TaskStatus.CONCLUIDA}>Concluída</option>
           </select>
         </div>
 
