@@ -34,28 +34,28 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 bg-grid-slate-200/60 dark:bg-grid-slate-700/60 bg-[size:20px_20px] opacity-30"></div>
+    <div className="min-h-screen bg-brand-dark flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
 
-      <div className="relative max-w-md w-full space-y-8">
+      <div className="relative max-w-md w-full space-y-6 sm:space-y-8">
         <div className="text-center">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-scale-in">
-            <span className="text-white font-bold text-2xl">S</span>
+          <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-gradient-brand rounded-2xl flex items-center justify-center mb-4 sm:mb-6 animate-scale-in shadow-glow-orange">
+            <span className="text-white font-bold text-lg sm:text-2xl">S</span>
           </div>
-          <h2 className="text-3xl font-bold text-gradient animate-fade-in">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white animate-fade-in">
             Silva&apos;s Artesanatos
           </h2>
-          <p className="mt-2 text-slate-600 dark:text-slate-400 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          <p className="mt-2 text-sm sm:text-base text-neutral-300 animate-fade-in" style={{ animationDelay: '0.1s' }}>
             Faça login em sua conta
           </p>
         </div>
 
-        <div className="glass-effect rounded-2xl p-8 shadow-card-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <form className="space-y-6" onSubmit={handleSubmit}>
+        <div className="glass-effect rounded-2xl p-6 sm:p-8 shadow-card-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <form className="space-y-5 sm:space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              <label htmlFor="email" className="block text-sm font-semibold text-white mb-2">
                 <span className="flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 mr-2 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                   </svg>
                   Email
@@ -69,15 +69,15 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-slate-900 dark:text-slate-100"
-                placeholder="seu@email.com"
+                className="input"
+                placeholder="Digite seu email"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              <label htmlFor="password" className="block text-sm font-semibold text-white mb-2">
                 <span className="flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 mr-2 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                   Senha
@@ -92,13 +92,13 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 pr-12 bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-slate-900 dark:text-slate-100"
-                  placeholder="••••••••"
+                  className="input pr-12"
+                  placeholder="Digite sua senha"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors duration-200"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-neutral-400 hover:text-white transition-colors duration-200"
                 >
                   {showPassword ? (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,12 +115,12 @@ export default function LoginPage() {
             </div>
 
             {error && (
-              <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 rounded-lg animate-fade-in">
+              <div className="p-4 bg-status-error-light border border-status-error text-status-error-dark rounded-lg animate-fade-in">
                 <div className="flex items-center">
-                  <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>
-                  {error}
+                  <span className="text-sm font-medium">{error}</span>
                 </div>
               </div>
             )}
@@ -128,9 +128,9 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:from-slate-400 disabled:to-slate-500 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
+              className="w-full btn-primary py-3 px-6 text-base disabled:opacity-50 disabled:cursor-not-allowed shadow-glow-orange hover:shadow-glow-orange"
             >
-              <span className="flex items-center justify-center">
+              <span className="flex items-center justify-center font-semibold">
                 {loading ? (
                   <>
                     <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -150,12 +150,12 @@ export default function LoginPage() {
               </span>
             </button>
 
-            <div className="text-center pt-4 border-t border-slate-200 dark:border-slate-700">
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+            <div className="text-center pt-4 border-t border-neutral-600">
+              <p className="text-sm text-neutral-300">
                 Não tem uma conta?{' '}
                 <Link
                   href="/register"
-                  className="font-medium text-blue-600 hover:text-purple-600 dark:text-blue-400 dark:hover:text-purple-400 transition-colors duration-200"
+                  className="font-semibold text-brand-orange hover:text-brand-blue transition-colors duration-200 underline"
                 >
                   Cadastre-se aqui
                 </Link>
@@ -164,7 +164,7 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <div className="text-center text-xs text-slate-500 dark:text-slate-400 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+        <div className="text-center text-xs text-neutral-400 animate-fade-in" style={{ animationDelay: '0.4s' }}>
           © 2024 Silva&apos;s Artesanatos. Todos os direitos reservados.
         </div>
       </div>
