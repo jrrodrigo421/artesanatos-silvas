@@ -60,7 +60,14 @@ export interface ApiResponse<T = any> {
   error?: string;
 }
 
-export interface ApiError {
-  message: string;
-  status: number;
+export interface APIError extends Error {
+  response?: {
+    data?: {
+      error?: string;
+      message?: string;
+    };
+    status?: number;
+  };
+  request?: unknown;
+  config?: unknown;
 } 

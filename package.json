@@ -10,7 +10,14 @@
     "server:dev": "npx tsx watch server/index.ts",
     "server:build": "tsc server/index.ts --outDir dist --target es2020 --module commonjs --esModuleInterop --skipLibCheck",
     "server:start": "node dist/server/index.js",
-    "dev:all": "concurrently \"npm run dev\" \"npm run server:dev\""
+    "dev:all": "concurrently \"npm run dev\" \"npm run server:dev\"",
+    "deploy": "node scripts/deploy.js",
+    "deploy:backend": "node scripts/deploy.js backend",
+    "deploy:frontend": "node scripts/deploy.js frontend",
+    "deploy:help": "node scripts/deploy.js help",
+    "db:migrate": "npx prisma migrate deploy",
+    "db:generate": "npx prisma generate",
+    "db:studio": "npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^6.10.1",
