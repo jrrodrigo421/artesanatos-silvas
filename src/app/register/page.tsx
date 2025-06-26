@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { auth } from '@/lib/api';
+import { Loading } from '@/components/ui/loading';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -11,11 +12,17 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setPageLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +53,10 @@ export default function RegisterPage() {
       setLoading(false);
     }
   };
+
+  if (pageLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="min-h-screen bg-brand-dark flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">

@@ -1,15 +1,4 @@
-import { useEffect, useState } from "react";
-
 export const Loading = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!loading) return null;
-
   return (
     <div className="min-h-screen bg-brand-dark flex items-center justify-center">
       <div className="text-center">
