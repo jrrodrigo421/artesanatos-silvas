@@ -130,7 +130,7 @@ export default function DashboardPage() {
     concluida: tasks.filter(t => t.status === TaskStatus.CONCLUIDA).length,
   };
 
-  if (!loading) {
+  if (loading) {
     return <Loading />;
   }
 
