@@ -75,7 +75,7 @@ export default function RegisterPage() {
           </p>
         </div>
 
-        <div className="glass-effect rounded-2xl p-6 sm:p-8 shadow-card-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <div className="glass-effect rounded-2xl p-6 sm:p-8 shadow-card-lg" style={{ animationDelay: '0.2s' }}>
           <form className="space-y-5 sm:space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name" className="block text-sm font-semibold text-white mb-2">
@@ -252,7 +252,7 @@ export default function RegisterPage() {
         </div>
 
         <div className="text-center text-xs text-neutral-400 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          © 2024 Silva&apos;s Artesanatos. Todos os direitos reservados.
+          © 2025 Silva&apos;s Artesanatos. Todos os direitos reservados.
         </div>
       </div>
     </div>
