@@ -12,9 +12,6 @@
     "server:start": "node dist/server/index.js",
     "dev:all": "concurrently \"npm run dev\" \"npm run server:dev\"",
     "deploy": "node scripts/deploy.js",
-    "deploy:backend": "node scripts/deploy.js backend",
-    "deploy:frontend": "node scripts/deploy.js frontend",
-    "deploy:help": "node scripts/deploy.js help",
     "db:migrate": "npx prisma migrate deploy",
     "db:generate": "npx prisma generate",
     "db:studio": "npx prisma studio"

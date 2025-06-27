@@ -307,11 +307,6 @@ const deploy = async (options = {}) => {
       logInfo(`🔗 Frontend URL: ${frontendUrl}`);
     }
 
-    console.log('\n' + colors.yellow + '📝 Próximos passos:' + colors.reset);
-    console.log('   1. Verifique se as aplicações estão funcionando corretamente');
-    console.log('   2. Configure domínio customizado se necessário');
-    console.log('   3. Configure monitoring e alertas');
-
   } catch (error) {
     logError('Deploy falhou!');
     logError(error.message);
