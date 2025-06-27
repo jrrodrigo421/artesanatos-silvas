@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: silva-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: silvadb
+      POSTGRES_USER: silva
+      POSTGRES_PASSWORD: silva123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - silva-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U silva -d silvadb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: silva-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://silva:silva123@postgres:5432/silvadb
+      JWT_SECRET: silva-artesanatos-super-secret-key-2025
+      PORT: 3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - silva-network
+    volumes:
+      - ./prisma:/app/prisma
+    command: >
+      sh -c "
+        npx prisma migrate deploy &&
+        npx prisma generate &&
+        node dist/server/index.js
+      "
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  silva-network:
+    driver: bridge 

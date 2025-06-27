@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { LoginCredentials, RegisterCredentials, Task, User, CreateTaskData, UpdateTaskData, AuthResponse, ApiResponse } from '@/types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
