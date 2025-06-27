@@ -5,7 +5,6 @@ import { LoginCredentials, RegisterCredentials } from '../../src/types';
 
 const router = Router();
 
-// POST /auth/login
 router.post('/login', async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password }: LoginCredentials = req.body;
@@ -66,7 +65,6 @@ router.post('/login', async (req: Request, res: Response): Promise<void> => {
   }
 });
 
-// POST /auth/register
 router.post('/register', async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password, name }: RegisterCredentials = req.body;
@@ -145,7 +143,6 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
   }
 });
 
-// GET /auth/me
 router.get('/me', authenticateToken, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     res.json({

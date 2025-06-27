@@ -5,7 +5,6 @@ import { CreateTaskData, UpdateTaskData, TaskStatus } from '../../src/types';
 
 const router = Router();
 
-// GET /tasks
 router.get('/', authenticateToken, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const user = req.user!;
@@ -48,7 +47,6 @@ router.get('/', authenticateToken, async (req: AuthenticatedRequest, res: Respon
   }
 });
 
-// POST /tasks
 router.post('/', authenticateToken, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const user = req.user!;
@@ -110,7 +108,6 @@ router.post('/', authenticateToken, async (req: AuthenticatedRequest, res: Respo
   }
 });
 
-// GET /tasks/:id
 router.get('/:id', authenticateToken, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const user = req.user!;
@@ -153,7 +150,6 @@ router.get('/:id', authenticateToken, async (req: AuthenticatedRequest, res: Res
   }
 });
 
-// PUT /tasks/:id
 router.put('/:id', authenticateToken, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const user = req.user!;
@@ -244,7 +240,6 @@ router.put('/:id', authenticateToken, async (req: AuthenticatedRequest, res: Res
   }
 });
 
-// DELETE /tasks/:id
 router.delete('/:id', authenticateToken, async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
     const user = req.user!;
