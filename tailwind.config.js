@@ -225,7 +225,6 @@ module.exports = {
             backgroundColor: '#4299e1',
           },
         },
-        // Utilitários responsivos
         '.container-responsive': {
           width: '100%',
           marginLeft: 'auto',

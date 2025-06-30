@@ -31,8 +31,6 @@ export const TaskForm: React.FC<TaskFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Para criar: todos os campos são obrigatórios
-    // Para editar: campos podem ser opcionais
     const data = task
       ? { title, description, status } as UpdateTaskData
       : { title, description, status } as CreateTaskData;

@@ -10,7 +10,6 @@ const api = axios.create({
   },
 });
 
-// Interceptor para adicionar token JWT
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -19,7 +18,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Interceptor para tratar erros de autenticação
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -31,7 +29,6 @@ api.interceptors.response.use(
   }
 );
 
-// Auth functions
 export const auth = {
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
     const response = await api.post<ApiResponse<AuthResponse>>('/auth/login', credentials);
@@ -62,7 +59,6 @@ export const auth = {
   },
 };
 
-// Tasks functions
 export const tasks = {
   getAll: async (status?: string): Promise<Task[]> => {
     const params = status ? { status } : {};
